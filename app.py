@@ -44,8 +44,9 @@ def predict():
             y_pred_label = label_encoder.inverse_transform(y_pred)[0]
             predictions[model_name] = y_pred_label
 
-        # Final Recommendation (most frequent predicted category)
-        final_recommendation = max(predictions.values(), key=predictions.values().count)
+        # Convert dict_values to a list before calling count()
+        prediction_list = list(predictions.values())
+        final_recommendation = max(prediction_list, key=prediction_list.count)
 
         return jsonify({
             "predictions": predictions,
